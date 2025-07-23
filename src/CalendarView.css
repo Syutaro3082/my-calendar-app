@@ -1,0 +1,12 @@
+/* カレンダー全体の幅・文字サイズ */
+.custom-calendar {
+  width: 100%;
+  max-width: 600px;      /* カレンダーの横幅 */
+  font-size: 1.2rem;     /* カレンダー内の文字サイズ */
+}
+
+/* 各日付セルの高さ・幅 */
+.custom-calendar .react-calendar__tile {
+  height: 80px !important;  /* セルの縦幅 */
+  width: 80px !important;   /* セルの横幅 */
+}

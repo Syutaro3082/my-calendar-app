@@ -1,0 +1,62 @@
+import os
+import cv2
+import numpy as np
+import time
+
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+
+WIDTH = 1920
+HEIGHT = 1080
+FPS = 60
+
+# カメラの初期化
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
+cap.set(cv2.CAP_PROP_FPS, FPS)
+
+# 画像をキャプチャ
+ret, frame = cap.read()
+if not ret:
+    print("画像をキャプチャできませんでした")
+    cap.release()
+    exit()
+
+# グレースケールに変換
+gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+# 円を検出
+circles = cv2.HoughCircles(
+    gray_frame,
+    cv2.HOUGH_GRADIENT,
+    dp=1.2,minDist=30,param1=50,param2=30,minRadius=10,maxRadius=100
+)
+
+# 検出された円を描画
+if circles is not None:
+    circles = np.round(circles[0, :]).astype("int")
+    for (x, y, r) in circles:
+        cv2.circle(frame, (x, y), r, (0, 255, 0), 4)
+        cv2.rectangle(frame, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+    circle_count = len(circles)
+else:
+    circle_count = 0
+
+# 結果を表示
+
+cv2.putText(frame, f"Circles detected: {circle_count}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+# 画像を表示
+cv2.imshow("Frame", frame)
+cv2.imshow("Gray", gray_frame)
+
+cv2.waitKey(0)
+
+# 画像を保存
+cv2.imwrite('frame_with_circles.jpg', frame)
+cv2.imwrite('gray_frame.jpg', gray_frame)
+
+# カメラを解放
+cap.release()
+cv2.destroyAllWindows()
