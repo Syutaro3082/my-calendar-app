@@ -2,7 +2,7 @@
   "name": "my-calendar-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hiraokashutaro.github.io/my-calendar-app",
+  "homepage": "https://Syutaro3082.github.io/my-calendar-app",
   "dependencies": {
     "react": "^18.2.0",
     "react-calendar": "^4.2.0",
