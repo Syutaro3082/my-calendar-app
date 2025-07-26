@@ -1,12 +1,32 @@
-/* カレンダー全体の幅・文字サイズ */
+/* カレンダー全体のサイズ・文字サイズ */
 .custom-calendar {
   width: 100%;
-  max-width: 600px;      /* カレンダーの横幅 */
-  font-size: 1.2rem;     /* カレンダー内の文字サイズ */
+  max-width: 800px;
+  font-size: 1.3rem;
 }
 
-/* 各日付セルの高さ・幅 */
+/* 各日付セルの高さ・幅・折り返し対応 */
 .custom-calendar .react-calendar__tile {
-  height: 80px !important;  /* セルの縦幅 */
-  width: 80px !important;   /* セルの横幅 */
+  height: 120px !important;
+  width: 100px !important;
+  padding: 6px;
+  white-space: normal;      /* 折り返しを許可 */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;         /* ここで行間を詰める */
+}
+
+/* セル内の予定部分 */
+.calendar-entry {
+  font-size: 0.9rem;
+  line-height: 1.2;         /* ここでも行間を詰める */
+  margin: 0;
+  padding: 0;
+}
+
+/* 今日の日付を強調表示 */
+.today-highlight {
+  background-color: #ffe082;
 }

@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>カレンダー共有アプリ</h1>
+        <h1>カレンダーアプリ</h1>
         <CalendarView /> {/* カレンダーを表示 */}
       </header>
     </div>
